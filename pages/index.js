@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
+import useSWR from 'swr';
 
 import { animate, motion } from "framer-motion"
 import { useRef, useState, useEffect } from 'react';
@@ -57,21 +58,59 @@ const navigationButtons = (buttonNames) => {
   )
 }
 
-const answerButtons = () => {
-  let questions = {
-    id: 0,
-    answer: 'Multiple Times a day',
-    weight: 5,
-    type: 'multiple'
-  };
+
+const questioneer = () => {
+
+  const {data,error} = useSWR("data/questions.json", (url) => fetch(url).then((res) => res.json()));
+
+  const [page, setPage] = useState(0);
+  const switchpage = () => {
+      if (nextClicked && page < data.questions.length) {
+          setPage(page + 1);
+      }
+      else if (prevClicked && page > 0) {
+          setPage(page - 1);
+      }
+  }
+
+  const json = data.questions[page];
+
+  const title = json.title;
+  const type = json.type;
 
 
   return (
     <>
-      <div></div>
-      <div >
-        {questions.answer}
+    <div className={styles.questioneer}>
+      <div className={styles.questioneer_box}>
+        <h3 className={styles.questioneer_heading}>{title}</h3>
+        <div>
+          {questioneerAnswers(json)}
+        </div>
+
+        <div className={styles.questioneer_buttons}>
+          <div className={styles.prevButton}></div>
+          <div className={styles.nextButton}></div>
+        </div>
+      
+        <div className={styles.currentPageIndex}>{page + 1} / {data.questions.length}</div>
       </div>
+    </div>
+    </>
+  )
+}
+
+const questioneerAnswers = (json) => {
+  const answers = json.answers;
+
+  return (
+    <>
+      {answers.map((value) => (
+        <div className={styles.questioneer_answer_container}>
+          <div className={styles.questioneer_answer_button}></div>
+          <div className={styles.questioneer_answer_text}>{value.answer}</div>
+        </div>
+      ))}
     </>
   )
 }
@@ -84,11 +123,6 @@ export default function Home() {
 
   return (
     <>
-
-
-      
-
-
       <div className={styles.hero}>
 
         <h1>Social Media</h1>
@@ -104,13 +138,7 @@ export default function Home() {
 
       {/* handy hier */}
 
-      <div className={styles.questioneer}>
-        <div>
-          <div className={styles.questioneerHeading}>How often do you use social media platforms?</div>
-          {answerButtons()}
-
-        </div>
-      </div>
+      {questioneer()}
       
       <div className={styles.header}>
 
