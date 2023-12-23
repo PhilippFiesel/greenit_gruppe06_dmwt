@@ -1,0 +1,47 @@
+@import url('/public/Oxygen-Regular.ttf');
+
+:root {
+  --primary: #22F268;
+  --secondary: #18A0FB;
+
+  --success: #22F268;
+  --danger: #F5372C;
+  --attention: #E6DD20;
+  --info: #18A0FB;
+
+  --neutral-text: #7B868A;
+  --white-text: #FFFFFF;
+
+  --box-fill: #161616;
+  --phone-fill: #0F0F0F;
+  --appicon-fill: #082438;
+
+  --background: #000000;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  font-family: 'Oxygen Regular', sans-serif;
+  letter-spacing: 0.5px;
+  
+  background-color: var(--background);
+}
+
+
+h1 {
+  font-size: 60px;
+}
+
+h2 {
+  font-size: 48px;
+  color: var(--white-text);
+}
+
+h3 {
+  font-size: 36px;
+}
