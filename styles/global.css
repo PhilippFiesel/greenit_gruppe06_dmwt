@@ -1,7 +1,7 @@
 @import url('/public/Oxygen-Regular.ttf');
 
 :root {
-  --primary: #22F268;
+  --primary: rgb(33, 242, 103);
   --secondary: #18A0FB;
 
   --success: #22F268;
@@ -9,7 +9,7 @@
   --attention: #E6DD20;
   --info: #18A0FB;
 
-  --neutral-text: #7B868A;
+  --neutral-text: rgb(123, 134, 138);
   --white-text: #FFFFFF;
 
   --box-fill: #161616;
@@ -20,6 +20,7 @@
 }
 
 * {
+  color: var(--white-text);
   padding: 0;
   margin: 0;
 }
@@ -35,13 +36,18 @@ body {
 
 h1 {
   font-size: 60px;
+  font-weight: 800;
 }
 
 h2 {
   font-size: 48px;
   color: var(--white-text);
+  margin-top: 30px;
 }
 
 h3 {
-  font-size: 36px;
+  font-size: 24px;
+  color: var(--white-text);
+  margin-top: 10px;
+  font-weight: 400;
 }
