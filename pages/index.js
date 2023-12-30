@@ -3,7 +3,7 @@ import styles from '../styles/Home.module.css';
 
 import { animate, motion } from "framer-motion";
 
-import Navigation, { navigationButtons } from './components/navigationButtons.js';
+import { Navigation } from './components/navigationButtons.js';
 import { questioneer } from './components/questioneer.js';
 import Info, { info } from './components/info.js';
 import Phone, { phone } from './components/phone.js';
@@ -31,7 +31,7 @@ export default function Home() {
       <Questioneer />
       <ContactForm  />
       
-      <Navigation buttonNames={["Home", "Information", "Phone", "Questioneer"]} />
+      {Navigation(["Home", "Information", "Phone", "Questioneer"])}
     </>
   );
 }
