@@ -3,7 +3,7 @@ import useSWR from 'swr';
 
 const fetcher = url => fetch(url).then(res => res.json())
 
-const Post = () => {
+const ContactForm = () => {
     const [email, setEmail] = useState('');
     const [name, setName] = useState('');
     const [firstname, setFirstName] = useState('');
@@ -100,4 +100,4 @@ const Post = () => {
     )
 }
 
-export default Post;
+export default ContactForm;
