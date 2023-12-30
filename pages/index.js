@@ -1,18 +1,12 @@
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 
-import { animate, motion } from "framer-motion";
-
-import { Navigation } from './components/navigationButtons.js';
-import { questioneer } from './components/questioneer.js';
+import Navigation from './components/navigationButtons.js';
 import Info, { info } from './components/info.js';
 import Phone, { phone } from './components/phone.js';
 import ContactForm, {Post} from './components/post.js';
 import Questioneer from './components/questioneer';
 import { useRef } from 'react';
-
-let result = 0;
-
 
 export default function Home() {
   const ref = useRef(null);
@@ -31,7 +25,7 @@ export default function Home() {
       <Questioneer />
       <ContactForm  />
       
-      {Navigation(["Home", "Information", "Phone", "Questioneer"])}
+      <Navigation />
     </>
   );
 }
