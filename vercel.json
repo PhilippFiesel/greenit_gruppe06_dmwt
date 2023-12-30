@@ -1,9 +1,10 @@
 {
+    "buildCommand": "next build",
     "builds": [
       {
         "src": "pages",
         "use": "@vercel/static-build" 
       }
     ]
-  }
+}
   
