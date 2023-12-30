@@ -1,69 +1,91 @@
 import { useRef, useState, useEffect } from 'react';
-import { animate, motion } from "framer-motion";
+import { animate, easeOut, motion } from "framer-motion";
 import styles from '../../styles/Home.module.css';
 
-const calculateIndicator = (current) => {
-  switch (current) {
-    case 1: return -15 - 75;
-    case 2: return +15 + 75;
-    case 3: return +45 + 225;
+
+const buttons = [
+  {
+    description: "Home",
+    destination: 0
+  },
+
+  {
+    description: "Information",
+    destination: 525
+  },
+
+  {
+    description: "Phone",
+    destination: 1325
+  },
+
+  {
+    description: "Questioneer",
+    destination: 2150
   }
-}
+];
+
+var scrolling = false;
+var position = 0;
 
 const Navigation = () => {
-    const buttonNames = ["Home", "Information", "Phone", "Questioneer"];
-
     // states for color and position of navigation indicator
-    //const [values, setValues] = useState({color: 0, pos: 0});
     const [current, setCurrent] = useState(0);
 
-    const change = (index) => {
-      var pos = 0;
-      switch(index) {
-        case 0: pos = 0; break;
-        case 1: pos = 525;break;
-        case 2: pos = 1325;break;
-        case 3: pos = 2150;break;
-      }
+    // navigation button clicked
+    const navigateTo = (clicked) => {
+
       window.scrollTo({
-        top: pos,
-        behavior: "smooth"
+        top: buttons[clicked].destination
       })
-      setCurrent(index);
+
+      scrolling = false;
+
+      setCurrent(clicked);
     }
+
+    useEffect(() => {
+      const handleScroll = () => {
+        position = window.scrollY;
+
+          if (!scrolling) {
+            if (buttons[current+1] != null && position > buttons[current+1].destination) {
+              setCurrent(current => current+1);
+            }
+            else if (buttons[current-1] != null && position <= buttons[current-1].destination + 150) {
+              setCurrent(current => current-1);
+            }
+          }
+      };
   
-    // const startAnimation = (id) => {
-    //   // set reference to clicked element
-    //   refs[id].current.focus();
+      window.addEventListener('scroll', handleScroll);
+      return () => {
+        window.removeEventListener('scroll', handleScroll);
+      };
+    });
   
-    //   // calculate position
-    //   const computedStyles = window.getComputedStyle(refs[id].current);
-    //   const rect = refs[id].current.getBoundingClientRect();
-    //   const pos = rect.left + parseInt(computedStyles.width) / 2 - 10;
-  
-    //   // re-render and animate
-    //   setValues(() => ({
-    //     color: id,
-    //     pos: pos
-    //   }));
-    // }
-  
+
     return (
       <div className={styles.header}>
         <div style={{display: "flex", height: "100%"}}>
-          {buttonNames.map((name, index) => (
-            <motion.div
-              key={index}
-              className={styles.header_button}
-              whileHover={{ cursor: 'pointer' }}
-              animate={{color: current === index ? 'rgb(33, 242, 103)' : 'rgb(123, 134, 138)',
-            }}
-              
-              onClick={() => change(index)}
-            >
-              {name}
-            </motion.div>
-          ))}
+          {
+            buttons.map((button, clicked) => (
+              <motion.div
+                className={styles.header_button}
+
+                onClick={() => navigateTo(clicked)}
+                animate={{
+                  color: current === clicked ? "var(--primary)" : "var(--neutral-text)",
+                  scale: current === clicked ? 1.075 : 1,
+                  transition: {duration: 0.3}
+                }}
+              >
+                {
+                  button.description // text for button
+                }
+              </motion.div>
+            ))
+          }
         </div>
         
   
@@ -73,11 +95,18 @@ const Navigation = () => {
           style={{x: -225 - 45 - 2.5}}
 
           animate={{x: calculateIndicator(current)}}
-
-          transition={{ type: "tween", duration: 0.35 }}
+          transition={{ type: "tween", duration: 0.275, ease: "easeOut" }}
         />
       </div>
     )
+  }
+
+  const calculateIndicator = (current) => {
+    switch (current) {
+      case 1: return -15 - 75;
+      case 2: return +15 + 75;
+      case 3: return +45 + 225;
+    }
   }
 
   export default Navigation;

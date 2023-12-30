@@ -37,9 +37,12 @@ const Info = () => {
 
 
     return (
-        <motion.div ref={ref} className={styles.info_container} 
+        <motion.div className={styles.info_container} 
+        >
+            <motion.div className={styles.info_box}
+                whileHover={{scale: 1.025}}
+                transition={{duration: 0.3}}
             >
-            <motion.div className={styles.info_box}>
 
             <motion.h4 style={{
                     marginBottom: "60px",
@@ -47,7 +50,8 @@ const Info = () => {
                     position: "relative",
                     left: "40px",
                     width: "450px"
-                }}>
+                }}
+            >
                     Social Media produces
                     <span style={{color: "var(--neutral-text)"}}> CO
                     <span style={{fontSize: "16px", color: "var(--neutral-text)"}}>2</span></span>
@@ -83,7 +87,10 @@ const Info = () => {
             </motion.div>
 
 
-            <motion.div className={styles.info_box}>
+            <motion.div className={styles.info_box}
+                whileHover={{scale: 1.025}}
+                transition={{duration: 0.3}}
+            >
             <h4
             style={{
                 marginBottom: "60px",
