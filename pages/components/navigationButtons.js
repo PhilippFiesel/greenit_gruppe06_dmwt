@@ -67,7 +67,7 @@ const Navigation = (buttons) => {
               
               onClick={() => change(index)}
             >
-              {name[0]}
+              {name}
             </motion.div>
           ))}
         </div>

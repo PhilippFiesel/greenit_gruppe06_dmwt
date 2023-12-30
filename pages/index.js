@@ -27,11 +27,11 @@ export default function Home() {
       </div>
 
       <Info />
-      <Phone ref={ref} />
+      <Phone />
       <Questioneer />
       <ContactForm  />
       
-      <Navigation buttonNames={[["Home"], ["Information"], ["Phone", ref], ["Questioneer"]]} />
+      <Navigation buttonNames={["Home", "Information", "Phone", "Questioneer"]} />
     </>
   );
 }
