@@ -17,11 +17,6 @@ const Navigation = (buttons) => {
     //const [values, setValues] = useState({color: 0, pos: 0});
     const [current, setCurrent] = useState(0);
 
-    const refs = Array.from({ length: buttonNames.length }, () => useRef(null));
-    const refFocus = useRef(null);
-
-
-
     const change = (index) => {
       var pos = 0;
       switch(index) {
@@ -61,7 +56,6 @@ const Navigation = (buttons) => {
               key={index}
               className={styles.header_button}
               whileHover={{ cursor: 'pointer' }}
-              ref={refs[index]}
               animate={{color: current === index ? 'rgb(33, 242, 103)' : 'rgb(123, 134, 138)',
             }}
               
@@ -75,7 +69,6 @@ const Navigation = (buttons) => {
   
         <motion.div
           className={styles.navIndicator}
-          ref={refFocus}
           
           style={{x: -225 - 45 - 2.5}}
 
