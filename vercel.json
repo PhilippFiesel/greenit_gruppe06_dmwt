@@ -1,8 +1,7 @@
 {
-    "version": 2,
     "builds": [
       {
-        "src": "package.json",
+        "src": "pages",
         "use": "@vercel/static-build" 
       }
     ]
