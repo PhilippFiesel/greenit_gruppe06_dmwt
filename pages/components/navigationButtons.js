@@ -10,8 +10,8 @@ const calculateIndicator = (current) => {
   }
 }
 
-const Navigation = () => {
-    const buttonNames = ["Home", "Information", "Phone", "Questioneer"];
+const Navigation = (buttons) => {
+    const buttonNames = buttons;
 
     // states for color and position of navigation indicator
     //const [values, setValues] = useState({color: 0, pos: 0});
@@ -80,4 +80,4 @@ const Navigation = () => {
     )
   }
 
-  export default Navigation;
+  export {Navigation};
